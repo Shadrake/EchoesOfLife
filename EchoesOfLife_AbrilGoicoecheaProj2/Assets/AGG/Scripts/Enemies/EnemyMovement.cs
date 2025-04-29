@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    float speed;
-
     [Header("Enemy type")]
     public bool isStatic;
     public bool isWalker;
 
+    [Header("Walk settings")]
+    float speed;
     public bool walksRight;
     public float walkTime;
-
     private float walkTimer;  // Temporizador para el tiempo de caminata
 
+    [Header("Components")]
+    public Animator _enemyAnimator;
+    
     /*[Header("Checks")]
     public Transform pitCheck;
     public Transform wallCheck;
@@ -28,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
     {
         speed = GetComponent<Enemy>().enemySpeed; // Obtiene la velocidad del enemigo de otro componente
         walkTimer = walkTime; // Inicializamos el temporizador con el valor de walkTime
+        _enemyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,7 +50,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (isWalker)
         {
-            // Si el enemigo es un caminante, realizamos el movimiento
+            _enemyAnimator.SetBool("Run",true);
             MoveEnemy();
         }
     }

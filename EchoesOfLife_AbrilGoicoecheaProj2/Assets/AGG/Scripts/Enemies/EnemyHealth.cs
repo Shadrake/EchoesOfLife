@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [Header("Enemy Settings")]
     public bool isDamaged;
 
     [Header("Componentes")]
@@ -47,10 +48,9 @@ public class EnemyHealth : MonoBehaviour
     {
         isDamaged = true;
 
-        _animator.SetBool("Damaged", true);
+        _animator.SetTrigger("Damaged");
 
         yield return new WaitForSeconds(0.5f);
         isDamaged = false;
-        _animator.SetBool("Damaged", false);  
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    Enemy _enemy;
     public bool isDamaged;
 
+    [Header("Componentes")]
+    Enemy _enemy;
     public Animator _animator;
     public Rigidbody2D _enemyRb;
 
-    // Start is called before the first frame update
     void Start()
     {
         _enemy = GetComponent<Enemy>();

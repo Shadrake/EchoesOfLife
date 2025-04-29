@@ -39,7 +39,7 @@ public class EnemyHealth : MonoBehaviour
 
             if(_enemy.enemyLife <= 0)
             {
-                Destroy(gameObject);
+                StartCoroutine(EnemyDead());
             }
         }
     }
@@ -52,5 +52,12 @@ public class EnemyHealth : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         isDamaged = false;
+    }
+
+    private IEnumerator EnemyDead()
+    {
+        _animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 }

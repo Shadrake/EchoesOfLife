@@ -9470,7 +9470,7 @@ Transform:
   m_GameObject: {fileID: 942108179}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.6225513, w: -0.782579}
-  m_LocalPosition: {x: -3.729462, y: 1.8548889, z: 0}
+  m_LocalPosition: {x: -3.729462, y: 1.854889, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17839,6 +17839,14 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4040624058225734298, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.15086415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040624058225734298, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.98855454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040624058225734298, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 162.646
       objectReference: {fileID: 0}
@@ -17860,7 +17868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4310523730931125928, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 157.667
+      value: 179.35
       objectReference: {fileID: 0}
     - target: {fileID: 4562022012725050912, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
       propertyPath: m_Layer
@@ -17888,7 +17896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6564468467387769428, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 121.197
+      value: 290.7
       objectReference: {fileID: 0}
     - target: {fileID: 6795080337503438449, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
       propertyPath: m_Layer
@@ -17940,7 +17948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8614052404494487835, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 1.683
+      value: 1.618
       objectReference: {fileID: 0}
     - target: {fileID: 8979737198997479195, guid: a9e6ad69af7038747a4f749aa32844f0, type: 3}
       propertyPath: m_Layer

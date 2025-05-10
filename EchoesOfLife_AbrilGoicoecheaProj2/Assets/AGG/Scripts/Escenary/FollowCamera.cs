@@ -9,7 +9,7 @@ public class FollowCamera : MonoBehaviour
 
     public static FollowCamera instance;
 
-    [Range(-150,150)]
+    [Range(-300,300)]
     public float minModX, maxModX, minModY, maxModY;
 
     private void Awake()

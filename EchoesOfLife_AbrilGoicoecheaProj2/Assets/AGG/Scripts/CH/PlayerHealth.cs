@@ -45,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.CompareTag("Enemy") && !isInmune)
         {
 
-            playerHealth -= collision.GetComponent<Enemy>().damage;
+            playerHealth -= collision.GetComponentInParent<Enemy>().damage;
             StartCoroutine(Inmunity());
 
             if (playerHealth <= 0)

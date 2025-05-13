@@ -8,5 +8,7 @@ public class Enemy : MonoBehaviour
     public float enemyLife;
     public float enemySpeed;
     public float damage;
+
+    public float maxHealth;
     //public float knockbackForceX, knockbackForceY;
 }

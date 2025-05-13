@@ -12,6 +12,7 @@ TagManager:
   - Crystal
   - Lamp
   - PowerUp
+  - BreakWall
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Enemy
   - Crystal
   - Lamp
-  - 
+  - BreakWall
   - 
   - 
   - 

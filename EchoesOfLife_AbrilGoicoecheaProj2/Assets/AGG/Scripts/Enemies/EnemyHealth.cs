@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;  // Necesario para la barra de vida (Image)
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -12,34 +13,43 @@ public class EnemyHealth : MonoBehaviour
     public Animator _animator;
     public Rigidbody2D _enemyRb;
 
+    [Header("Health UI Settings")]
+    public Image healthBar;  // Referencia a la UI de la barra de vida
+
     void Start()
     {
         _enemy = GetComponent<Enemy>();
         _animator = GetComponent<Animator>();
         _enemyRb = GetComponent<Rigidbody2D>();
+
+        // Asegúrate de que la barra de vida está llena al inicio
+        if (healthBar != null)
+        {
+            healthBar.fillAmount = 1f;  // 100% de vida al inicio
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if(collision.CompareTag("Weapon") && !isDamaged)
+        if (collision.CompareTag("Weapon") && !isDamaged)
         {
+            // Reducir vida
             _enemy.enemyLife -= 1f;
-            /*if(collision.transform.position.x < transform.position.x)
+
+            // Actualizar barra de vida
+            if (healthBar != null)
             {
-                _enemyRb.AddForce(new Vector2(_enemy.knockbackForceX, _enemy.knockbackForceY), ForceMode2D.Force);
+                healthBar.fillAmount = _enemy.enemyLife / _enemy.maxHealth;  // Asumiendo que tienes una variable maxHealth
             }
 
-            else
-            {
-                _enemyRb.AddForce(new Vector2(-_enemy.knockbackForceX, _enemy.knockbackForceY), ForceMode2D.Force);
-            }*/
-            
-            StartCoroutine(EnemyDamaged());
-            
-
-            if(_enemy.enemyLife <= 0)
+            // Si la vida del enemigo llega a 0, muere
+            if (_enemy.enemyLife <= 0)
             {
                 StartCoroutine(EnemyDead());
+            }
+            else
+            {
+                StartCoroutine(EnemyDamaged());
             }
         }
     }
@@ -47,7 +57,6 @@ public class EnemyHealth : MonoBehaviour
     private IEnumerator EnemyDamaged()
     {
         isDamaged = true;
-
         _animator.SetTrigger("Damaged");
 
         yield return new WaitForSeconds(0.5f);

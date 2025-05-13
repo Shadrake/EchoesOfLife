@@ -41,12 +41,7 @@ public class PlayerProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Cuando choca con un enemigo hace daño.
-        if(collision.CompareTag("Enemy"))
-        {
-            DestroyProjectile();
-        }
-
-        else if(collision.CompareTag("Lamp"))
+        if(collision.CompareTag("Enemy") || collision.CompareTag("Lamp") || collision.CompareTag("Crystal") || collision.CompareTag("BreakWall"))
         {
             DestroyProjectile();
         }

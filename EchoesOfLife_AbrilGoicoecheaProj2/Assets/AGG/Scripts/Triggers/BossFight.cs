@@ -11,6 +11,7 @@ public class BossFight : MonoBehaviour
     public Canvas bossCanvas;
     public BoxCollider2D _trigger;
     public GameObject boss;
+    public Animator _cameraFocus;
 
     
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class BossFight : MonoBehaviour
         _playerRB = playerController.GetComponent<Rigidbody2D>();
         _trigger = GetComponent<BoxCollider2D>();
         _playerAnimator = _playerAnimator.GetComponent<Animator>();
+        _cameraFocus = _cameraFocus.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,8 @@ public class BossFight : MonoBehaviour
         _playerAnimator.SetBool("Running", false);
         playerController.enabled = false;
         _playerRB.velocity = Vector2.zero;
+
+        _cameraFocus.SetTrigger("Active");
 
         _trigger.enabled = false;
         yield return new WaitForSeconds(5f);

@@ -150,9 +150,10 @@ public class PlayerController : MonoBehaviour
         {
             direction = Vector3.left; // izq
         }
-
+        Debug.Log("shoot");
         GameObject projectile = Instantiate(projectilePrefab,
             weaponPositionInstantiate.transform.position + direction * 0.01f, Quaternion.identity);
+        Debug.Log("shoot2");
 
         projectile.GetComponent<PlayerProjectile>().SetDirection(direction);
     }

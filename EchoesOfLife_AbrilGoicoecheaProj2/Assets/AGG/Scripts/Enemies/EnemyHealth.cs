@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("Health UI Settings")]
     public Image healthBar;  // Referencia a la UI de la barra de vida
+    public GameObject healthUI;
 
     void Start()
     {
@@ -66,7 +67,9 @@ public class EnemyHealth : MonoBehaviour
     private IEnumerator EnemyDead()
     {
         _animator.SetTrigger("Dead");
-        yield return new WaitForSeconds(1.5f);
+        healthUI.SetActive(false);
+        
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 }

@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         // Almacenamos el componente en la variable correspondiente.
         _rbPlayer = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         currentCooldown = timeDelayShoot;  // Inicializamos el cooldown con el valor completo
     }
 

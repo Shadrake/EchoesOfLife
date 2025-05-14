@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
     public Rigidbody2D _enemyRb;
 
     //[Header("Health UI Settings")]
-    //public Image healthBar;  // Referencia a la UI de la barra de vida
+    //public Image healthBar; 
     //public GameObject healthUI;
 
     void Start()
@@ -23,7 +24,7 @@ public class EnemyHealth : MonoBehaviour
         _animator = GetComponent<Animator>();
         _enemyRb = GetComponent<Rigidbody2D>();
 
-        // Asegúrate de que la barra de vida está llena al inicio
+        // La barra de vida está llena desdde el principio
         /*if (healthBar != null)
         {
             healthBar.fillAmount = 1f;  // 100% de vida al inicio
@@ -36,11 +37,11 @@ public class EnemyHealth : MonoBehaviour
         {
             // Reducir vida
             _enemy.enemyLife -= 1f;
-
+            StartCoroutine(EnemyDamaged());
             // Actualizar barra de vida
             /*if (healthBar != null)
             {
-                healthBar.fillAmount = _enemy.enemyLife / _enemy.maxHealth;  // Asumiendo que tienes una variable maxHealth
+                healthBar.fillAmount = _enemy.enemyLife / _enemy.maxHealth; 
             }
             */
 
@@ -48,10 +49,6 @@ public class EnemyHealth : MonoBehaviour
             if (_enemy.enemyLife <= 0)
             {
                 StartCoroutine(EnemyDead());
-            }
-            else
-            {
-                StartCoroutine(EnemyDamaged());
             }
         }
     }
@@ -63,14 +60,19 @@ public class EnemyHealth : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         isDamaged = false;
+        if (_enemy.enemyLife <= 0)
+        {
+            _animator.SetTrigger("Dead");
+        }
     }
 
     private IEnumerator EnemyDead()
     {
-        _animator.SetTrigger("Dead");
+        Debug.Log("Enemy dead");
+        //_animator.SetTrigger("Dead");
         //healthUI.SetActive(false);
         
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
     }
 }

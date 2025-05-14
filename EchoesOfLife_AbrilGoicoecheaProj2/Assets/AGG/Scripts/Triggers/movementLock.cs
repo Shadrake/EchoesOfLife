@@ -15,7 +15,7 @@ public class movementLock : MonoBehaviour
     {
         _playerRB = playerController.GetComponent<Rigidbody2D>();
         _trigger = GetComponent<BoxCollider2D>();
-        _playerAnimator = playerController.GetComponent<Animator>();
+        _playerAnimator = playerController.GetComponentInChildren<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

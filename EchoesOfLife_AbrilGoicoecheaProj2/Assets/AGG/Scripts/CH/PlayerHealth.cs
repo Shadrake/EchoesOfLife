@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         playerHealth = playerMaxHealth;
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _playerController = GetComponent<PlayerController>();
         _playerRB = GetComponent<Rigidbody2D>();
     }

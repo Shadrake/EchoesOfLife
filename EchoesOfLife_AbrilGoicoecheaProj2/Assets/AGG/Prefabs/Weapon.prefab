@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 7043406804586805678}
-  speed: 40
+  speed: 60
   playerContScript: {fileID: 0}

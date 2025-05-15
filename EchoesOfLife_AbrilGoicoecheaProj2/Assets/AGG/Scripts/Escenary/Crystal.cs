@@ -5,13 +5,15 @@ using UnityEngine;
 public class Crystal : MonoBehaviour
 {
     public Animator _crystalAnimator;
-    //public PlayerHealth _playerHealth;
-    
+    private GameObject _player;
+    private PlayerHealth _playerHealth;
+
     // Start is called before the first frame update
     void Start()
     {
         _crystalAnimator = GetComponent<Animator>();
-        //_playerHealth = GetComponent<PlayerHealth>
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerHealth = _player.GetComponent<PlayerHealth>();
     }
 
 
@@ -19,8 +21,16 @@ public class Crystal : MonoBehaviour
     {
         if (collision.CompareTag("Weapon"))
         {
-
-            _crystalAnimator.SetBool("Break", true);
+            _playerHealth.playerHealth += 2f;
+            //_crystalAnimator.SetBool("Break", true);
+            StartCoroutine(DestroyCrystal());
         }
+    }
+
+    IEnumerator DestroyCrystal()
+    {
+        _crystalAnimator.SetBool("Break", true);
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }

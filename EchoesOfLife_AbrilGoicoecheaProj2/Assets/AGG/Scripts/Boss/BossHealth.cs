@@ -14,6 +14,8 @@ public class BossHealth : MonoBehaviour
     public Rigidbody2D _enemyRb;
     public GameObject rockSpawn;
 
+    public GameObject _endTrigger;
+
     [Header("Health UI Settings")]
     public Image healthBar;  // Referencia a la UI de la barra de vida
     public GameObject healthUI;
@@ -72,6 +74,7 @@ public class BossHealth : MonoBehaviour
         rockSpawn.SetActive(false);
 
         yield return new WaitForSeconds(5f);
+        _endTrigger.SetActive(true);
         Destroy(gameObject);
     }
 }

@@ -29,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         speed = GetComponent<Enemy>().enemySpeed; // Obtiene la velocidad del enemigo de otro componente
+        Debug.Log(speed);
+
         walkTimer = walkTime; // Inicializamos el temporizador con el valor de walkTime
         _enemyAnimator = GetComponent<Animator>();
     }
@@ -52,6 +54,7 @@ public class EnemyMovement : MonoBehaviour
         {
             _enemyAnimator.SetBool("Run",true);
             MoveEnemy();
+            Debug.Log("Walker");
         }
     }
 
@@ -61,10 +64,14 @@ public class EnemyMovement : MonoBehaviour
         if (walksRight)
         {
             transform.Translate(Vector2.right * Time.deltaTime * speed, Space.World);
+            Debug.Log("R"+ Time.deltaTime * speed);
+
         }
         else
         {
             transform.Translate(Vector2.left * Time.deltaTime * speed, Space.World);
+            Debug.Log("L" + Time.deltaTime * speed);
+
         }
 
         // Reducimos el temporizador de caminata

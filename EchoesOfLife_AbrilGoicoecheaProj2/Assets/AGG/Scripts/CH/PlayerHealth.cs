@@ -54,6 +54,18 @@ public class PlayerHealth : MonoBehaviour
             }
 
         }
+
+        else if (collision.CompareTag("Rock") && !isInmune)
+        {
+
+            playerHealth -= collision.GetComponent<FallingRock>().damage;
+            StartCoroutine(Inmunity());
+
+            if (playerHealth <= 0)
+            {
+                StartCoroutine(GameOver());
+            }
+        }
     }
 
     IEnumerator Inmunity()

@@ -5,4 +5,8 @@ using UnityEngine;
 public class FallingRock : MonoBehaviour
 {
     public float damage;
+    void Start()
+    {
+        Destroy(gameObject, 2f);
+    }
 }

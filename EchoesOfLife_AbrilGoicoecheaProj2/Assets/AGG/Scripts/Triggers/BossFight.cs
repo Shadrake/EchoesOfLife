@@ -5,16 +5,22 @@ using UnityEngine.UI;
 
 public class BossFight : MonoBehaviour
 {
+    public BoxCollider2D _trigger;
+
+    [Header("Player components")]
     public PlayerController playerController;
     public Animator _playerAnimator;
     public Rigidbody2D _playerRB;
-    public Canvas bossCanvas;
-    public BoxCollider2D _trigger;
-    public GameObject boss;
     public Animator _cameraFocus;
 
-    
-    // Start is called before the first frame update
+    [Header("Boss Components")]
+    public Canvas bossCanvas;
+    public GameObject boss;
+
+    [Header("Rock Components")]
+    public GameObject rockSpawner;
+
+    // Start is called before the first frame update 
     void Start()
     {
         _playerRB = playerController.GetComponent<Rigidbody2D>();
@@ -23,15 +29,9 @@ public class BossFight : MonoBehaviour
         _cameraFocus = _cameraFocus.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             StartCoroutine(StartBattle());
         }
@@ -51,5 +51,6 @@ public class BossFight : MonoBehaviour
         yield return new WaitForSeconds(5f);
         bossCanvas.gameObject.SetActive(true);
         playerController.enabled = true;
+        rockSpawner.SetActive(true);
     }
 }

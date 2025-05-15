@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public bool isInmune;
     public float inmuneTime;
     private Rigidbody2D _playerRB;
+    public CapsuleCollider2D _capsuleCollider;
 
     [Header("UI Settings")]
     public Image healthImg;
@@ -81,8 +82,8 @@ public class PlayerHealth : MonoBehaviour
     {
         _animator.SetTrigger("Die");
         _playerRB.velocity = Vector2.zero;
-
         _playerController.enabled = false;
+        _capsuleCollider.enabled = false;
         yield return new WaitForSeconds(3f);
         gameOver.SetActive(true);
     }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +38,9 @@ public class BossFight : MonoBehaviour
 
     IEnumerator StartBattle()
     {
+        // 👇 Cambiar la música al tema del jefe
+        FindObjectOfType<GameManager>().OnBossFightStart();
+
         boss.SetActive(true);
 
         _playerAnimator.SetBool("Running", false);
@@ -49,6 +51,7 @@ public class BossFight : MonoBehaviour
 
         _trigger.enabled = false;
         yield return new WaitForSeconds(5f);
+
         bossCanvas.gameObject.SetActive(true);
         playerController.enabled = true;
         rockSpawner.SetActive(true);

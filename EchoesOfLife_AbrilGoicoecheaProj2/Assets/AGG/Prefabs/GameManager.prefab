@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7361607479439518098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1407253642764729230}
+  - component: {fileID: 5091528957211269794}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1407253642764729230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7361607479439518098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1038.4668, y: 611.6554, z: -12.923172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5091528957211269794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7361607479439518098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115432084bfb51b429c17b90ce958cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlsUI: {fileID: 0}
+  pauseUI: {fileID: 0}
+  player: {fileID: 0}
+  musicSource: {fileID: 0}
+  mainMenuMusic: {fileID: 8300000, guid: 363b27f480b34d048b2980a186085096, type: 3}
+  levelMusic: {fileID: 8300000, guid: 875c0db78058a43438e00ff85da26797, type: 3}
+  bossMusic: {fileID: 8300000, guid: d0584879808eb244c94cd76029816d21, type: 3}
+  gameOverMusic: {fileID: 8300000, guid: bfcd227f05dcdf944aaafc5940c2c48e, type: 3}
+  victoryMusic: {fileID: 8300000, guid: 1773f26b69bc1f94d963ca7f2f7b3ab3, type: 3}

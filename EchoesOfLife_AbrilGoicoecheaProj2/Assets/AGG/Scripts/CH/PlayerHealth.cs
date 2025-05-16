@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public float inmuneTime;
     private Rigidbody2D _playerRB;
     public CapsuleCollider2D _capsuleCollider;
+    private bool isDead = false;
 
     [Header("UI Settings")]
     public Image healthImg;
@@ -21,7 +21,6 @@ public class PlayerHealth : MonoBehaviour
     [Header("Components")]
     public Animator _animator;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerHealth = playerMaxHealth;
@@ -30,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
         _playerRB = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         healthImg.fillAmount = playerHealth / playerMaxHealth;
@@ -43,27 +41,21 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && !isInmune)
+        if ((collision.CompareTag("Enemy") || collision.CompareTag("Rock")) && !isInmune && !isDead)
         {
+            float damage = 0;
 
-            playerHealth -= collision.GetComponentInParent<Enemy>().damage;
+            if (collision.CompareTag("Enemy"))
+                damage = collision.GetComponentInParent<Enemy>().damage;
+            else if (collision.CompareTag("Rock"))
+                damage = collision.GetComponent<FallingRock>().damage;
+
+            playerHealth -= damage;
             StartCoroutine(Inmunity());
 
             if (playerHealth <= 0)
             {
-                StartCoroutine(GameOver());
-            }
-
-        }
-
-        else if (collision.CompareTag("Rock") && !isInmune)
-        {
-
-            playerHealth -= collision.GetComponent<FallingRock>().damage;
-            StartCoroutine(Inmunity());
-
-            if (playerHealth <= 0)
-            {
+                isDead = true; // Solo se activa una vez
                 StartCoroutine(GameOver());
             }
         }
@@ -73,7 +65,6 @@ public class PlayerHealth : MonoBehaviour
     {
         _animator.SetTrigger("Damaged");
         isInmune = true;
-
         yield return new WaitForSeconds(inmuneTime);
         isInmune = false;
     }
@@ -84,6 +75,10 @@ public class PlayerHealth : MonoBehaviour
         _playerRB.velocity = Vector2.zero;
         _playerController.enabled = false;
         _capsuleCollider.enabled = false;
+
+        // Reproducir música de Game Over una sola vez
+        FindObjectOfType<GameManager>()?.OnGameOver();
+
         yield return new WaitForSeconds(3f);
         gameOver.SetActive(true);
     }

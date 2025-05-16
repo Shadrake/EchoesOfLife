@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,35 +19,35 @@ public class GameManager : MonoBehaviour
 
     private bool isPaused = false;
 
-    void Awake()
+    private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += OnSceneLoaded; 
-    }
+        // Suscribirse al evento de cambio de escena
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
-    void Start()
-    {
+        // Iniciar música correspondiente a la escena actual
         PlayMusicForScene(SceneManager.GetActiveScene().name);
     }
 
-    void Update()
+    private void OnDestroy()
+    {
+        // Asegurar que no se acumulen suscripciones al cambiar de escena
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
-            {
                 OpenPause();
-            }
             else
-            {
                 ClosePause();
-            }
         }
     }
 
     public void OpenPause()
     {
-        pauseUI.SetActive(true);
+        pauseUI?.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
 
@@ -56,15 +55,13 @@ public class GameManager : MonoBehaviour
         {
             var playerController = player.GetComponent<PlayerController>();
             if (playerController != null)
-            {
                 playerController.enabled = false;
-            }  
         }
     }
 
     public void ClosePause()
     {
-        pauseUI.SetActive(false);
+        pauseUI?.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
 
@@ -72,20 +69,18 @@ public class GameManager : MonoBehaviour
         {
             var playerController = player.GetComponent<PlayerController>();
             if (playerController != null)
-            {
                 playerController.enabled = true;
-            }
         }
     }
 
     public void OpenControls()
     {
-        controlsUI.SetActive(true);
+        controlsUI?.SetActive(true);
     }
 
     public void CloseControls()
     {
-        controlsUI.SetActive(false);
+        controlsUI?.SetActive(false);
     }
 
     public void Lvl1Button()
@@ -105,39 +100,51 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    // M�SICA 
+    // ================================
+    // AUDIO
+    // ================================
 
     public void PlayMusic(AudioClip clip)
     {
         if (musicSource == null || clip == null) return;
 
-        if (musicSource.clip == clip) return;
-
-        musicSource.Stop();
+        musicSource.Stop();        // Detener música anterior
         musicSource.clip = clip;
         musicSource.Play();
     }
 
-    void PlayMusicForScene(string sceneName)
+    public void StopMusic()
     {
-        if (sceneName == "scn_MainMenu")
+        if (musicSource != null)
         {
-            PlayMusic(mainMenuMusic);
-        }
-        else if (sceneName == "scn_Lvl1")
-        {
-            PlayMusic(levelMusic);
+            musicSource.Stop();
+            musicSource.clip = null;
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void PlayMusicForScene(string sceneName)
+    {
+        if (sceneName == "scn_MainMenu")
+            PlayMusic(mainMenuMusic);
+        else if (sceneName == "scn_Lvl1")
+            PlayMusic(levelMusic);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         PlayMusicForScene(scene.name);
     }
 
+    // Eventos especiales
+
     public void OnBossFightStart()
     {
         PlayMusic(bossMusic);
+    }
+
+    public void OnBossDefeated()
+    {
+        StopMusic();
     }
 
     public void OnGameOver()

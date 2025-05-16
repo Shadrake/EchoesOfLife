@@ -72,7 +72,7 @@ public class EnemyHealth : MonoBehaviour
         //_animator.SetTrigger("Dead");
         //healthUI.SetActive(false);
         
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
     }
 }

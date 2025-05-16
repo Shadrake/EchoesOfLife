@@ -51,5 +51,7 @@ MonoBehaviour:
   mainMenuMusic: {fileID: 8300000, guid: 363b27f480b34d048b2980a186085096, type: 3}
   levelMusic: {fileID: 8300000, guid: 875c0db78058a43438e00ff85da26797, type: 3}
   bossMusic: {fileID: 8300000, guid: d0584879808eb244c94cd76029816d21, type: 3}
+  screamBoss: {fileID: 8300000, guid: af4b507e330770845974418adac37e39, type: 3}
+  bossDefeated: {fileID: 8300000, guid: 31239df07c81a864f9886c30a3825b3b, type: 3}
   gameOverMusic: {fileID: 8300000, guid: bfcd227f05dcdf944aaafc5940c2c48e, type: 3}
   victoryMusic: {fileID: 8300000, guid: 1773f26b69bc1f94d963ca7f2f7b3ab3, type: 3}

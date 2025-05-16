@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public AudioClip mainMenuMusic;
     public AudioClip levelMusic;
     public AudioClip bossMusic;
+    public AudioClip screamBoss;
+    public AudioClip bossDefeated;
     public AudioClip gameOverMusic;
     public AudioClip victoryMusic;
 
@@ -21,16 +23,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Suscribirse al evento de cambio de escena
         SceneManager.sceneLoaded += OnSceneLoaded;
-
-        // Iniciar música correspondiente a la escena actual
         PlayMusicForScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnDestroy()
     {
-        // Asegurar que no se acumulen suscripciones al cambiar de escena
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -108,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         if (musicSource == null || clip == null) return;
 
-        musicSource.Stop();        // Detener música anterior
+        musicSource.Stop();
         musicSource.clip = clip;
         musicSource.Play();
     }
@@ -135,7 +133,9 @@ public class GameManager : MonoBehaviour
         PlayMusicForScene(scene.name);
     }
 
-    // Eventos especiales
+    // ================================
+    // EVENTOS DE JUEGO
+    // ================================
 
     public void OnBossFightStart()
     {
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
 
     public void OnBossDefeated()
     {
-        StopMusic();
+        PlayMusic(bossDefeated);
     }
 
     public void OnGameOver()
@@ -155,5 +155,27 @@ public class GameManager : MonoBehaviour
     public void OnVictory()
     {
         PlayMusic(victoryMusic);
+    }
+
+    // ================================
+    // EFECTOS DE SONIDO (SFX)
+    // ================================
+
+    // 🎵 Rugido de muerte del jefe (no detiene música)
+    public void PlayBossDefeatedSFX()
+    {
+        if (musicSource != null && bossDefeated != null)
+        {
+            musicSource.PlayOneShot(bossDefeated);
+        }
+    }
+
+    // 🎵 Rugido de aparición del jefe (no detiene música)
+    public void PlayBossScreamSFX()
+    {
+        if (musicSource != null && screamBoss != null)
+        {
+            musicSource.PlayOneShot(screamBoss);
+        }
     }
 }

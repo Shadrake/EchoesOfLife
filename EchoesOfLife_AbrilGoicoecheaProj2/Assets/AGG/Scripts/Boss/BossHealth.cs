@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;  // Necesario para la barra de vida (Image)
+using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class BossHealth : MonoBehaviour
     public GameObject _endTrigger;
 
     [Header("Health UI Settings")]
-    public Image healthBar;  // Referencia a la UI de la barra de vida
+    public Image healthBar;
     public GameObject healthUI;
 
     void Start()
@@ -26,27 +26,23 @@ public class BossHealth : MonoBehaviour
         _animator = GetComponent<Animator>();
         _enemyRb = GetComponent<Rigidbody2D>();
 
-        // Asegúrate de que la barra de vida está llena al inicio
         if (healthBar != null)
         {
-            healthBar.fillAmount = 1f;  // 100% de vida al inicio
+            healthBar.fillAmount = 1f;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Weapon") && !isDamaged)
         {
-            // Reducir vida
             _enemy.enemyLife -= 1f;
 
-            // Actualizar barra de vida
             if (healthBar != null)
             {
-                healthBar.fillAmount = _enemy.enemyLife / _enemy.maxHealth;  // Asumiendo que tienes una variable maxHealth
+                healthBar.fillAmount = _enemy.enemyLife / _enemy.maxHealth;
             }
 
-            // Si la vida del enemigo llega a 0, muere
             if (_enemy.enemyLife <= 0)
             {
                 StartCoroutine(EnemyDead());
@@ -72,6 +68,13 @@ public class BossHealth : MonoBehaviour
         _animator.SetTrigger("Dead");
         healthUI.SetActive(false);
         rockSpawn.SetActive(false);
+
+        // 🎵 Rugido del jefe sin detener música
+        GameManager gm = FindObjectOfType<GameManager>();
+        if (gm != null)
+        {
+            gm.PlayBossDefeatedSFX();
+        }
 
         yield return new WaitForSeconds(5f);
         _endTrigger.SetActive(true);

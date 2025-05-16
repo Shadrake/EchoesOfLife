@@ -19,7 +19,6 @@ public class BossFight : MonoBehaviour
     [Header("Rock Components")]
     public GameObject rockSpawner;
 
-    // Start is called before the first frame update 
     void Start()
     {
         _playerRB = playerController.GetComponent<Rigidbody2D>();
@@ -38,7 +37,6 @@ public class BossFight : MonoBehaviour
 
     IEnumerator StartBattle()
     {
-        // 👇 Cambiar la música al tema del jefe
         FindObjectOfType<GameManager>().OnBossFightStart();
 
         boss.SetActive(true);
@@ -49,11 +47,23 @@ public class BossFight : MonoBehaviour
 
         _cameraFocus.SetTrigger("Active");
 
+        // 🔊 Rugido al segundo 3.33
+        Invoke(nameof(PlayBossIntroRoar), 3.33f);
+
         _trigger.enabled = false;
         yield return new WaitForSeconds(5f);
 
         bossCanvas.gameObject.SetActive(true);
         playerController.enabled = true;
         rockSpawner.SetActive(true);
+    }
+
+    void PlayBossIntroRoar()
+    {
+        GameManager gm = FindObjectOfType<GameManager>();
+        if (gm != null)
+        {
+            gm.PlayBossScreamSFX();
+        }
     }
 }

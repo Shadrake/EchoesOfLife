@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +13,8 @@ public class BossEnd : MonoBehaviour
     [Header("End components")]
     public GameObject _endUI;
 
-    // Start is called before the first frame update 
     void Start()
     {
-        //_playerRB = playerController.GetComponent<Rigidbody2D>();
         _playerAnimator = _playerAnimator.GetComponent<Animator>();
         _cameraFocus = _cameraFocus.GetComponent<Animator>();
     }
@@ -37,6 +34,14 @@ public class BossEnd : MonoBehaviour
         _cameraFocus.SetTrigger("Active");
 
         yield return new WaitForSeconds(2f);
+
+        // Reproducir música de victoria
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.OnVictory();
+        }
+
         _endUI.SetActive(true);
     }
 }

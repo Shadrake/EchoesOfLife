@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
 
     public void MainMenuButton()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("scn_MainMenu");
     }
 

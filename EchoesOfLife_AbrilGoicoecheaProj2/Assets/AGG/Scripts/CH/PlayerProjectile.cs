@@ -42,10 +42,21 @@ public class PlayerProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Cuando choca con un enemigo hace daño.
-        if(collision.CompareTag("Enemy") || collision.CompareTag("Lamp") || collision.CompareTag("Crystal") || collision.CompareTag("Wall"))
+        bool isWall = collision.CompareTag("Wall");
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Lamp") || collision.CompareTag("Crystal") || isWall)
         {
             DestroyProjectile();
             Debug.Log("Destruir proyectil");
+        }
+
+        if(isWall)
+        {
+            Door breakable = collision.GetComponent<Door>();
+            if (breakable != null)
+            {
+                Debug.Log("Projectile: " + _direction);
+                breakable.TryBreak(_direction.x >= 1f ? true : false);
+            }
         }
     }
 }

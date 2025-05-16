@@ -71,6 +71,15 @@ public class GameManager : MonoBehaviour
 
     public void Lvl1Button()
     {
+        if (player != null)
+        {
+            var playerController = player.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.enabled = true;
+            }
+        }
+        Time.timeScale = 1f;
         SceneManager.LoadScene("scn_Lvl1");
     }
 

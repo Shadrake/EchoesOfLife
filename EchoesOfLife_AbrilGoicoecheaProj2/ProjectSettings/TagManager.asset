@@ -14,6 +14,7 @@ TagManager:
   - PowerUp
   - BreakWall
   - Rock
+  - Wall
   layers:
   - Default
   - TransparentFX

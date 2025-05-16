@@ -17,6 +17,13 @@ public class Door : MonoBehaviour
         if(collision.CompareTag("Weapon"))
         {
             _doorAnimator.SetBool("Destroy", true);
+            StartCoroutine(BreakWall());
         }
+    }
+
+    IEnumerator BreakWall()
+    {
+        yield return new WaitForSeconds(0.9f);
+        Destroy(gameObject);
     }
 }

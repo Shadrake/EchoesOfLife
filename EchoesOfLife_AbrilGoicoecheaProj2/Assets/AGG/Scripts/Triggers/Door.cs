@@ -6,9 +6,13 @@ public class Door : MonoBehaviour
 {
     public Animator _doorAnimator;
 
-    public bool breakRight = false;
+    public bool breakLeft = false;
 
     private bool _broken = false;
+
+    public AudioSource breakAudioSource;
+    public AudioClip breakSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +21,20 @@ public class Door : MonoBehaviour
 
     public void TryBreak(bool hitSide)
     {
-        if (_broken || breakRight != hitSide)
+        if (_broken || breakLeft != hitSide)
         {
             return;
         }
 
         _broken = true;
-         _doorAnimator.SetBool("Destroy", true);
+        _doorAnimator.SetBool("Destroy", true);
+
+        // Reproducir el sonido de ruptura
+        if (breakAudioSource != null && breakSound != null)
+        {
+            breakAudioSource.PlayOneShot(breakSound);
+        }
+
         StartCoroutine(BreakWall());
     }
     /*private void OnTriggerEnter2D(Collider2D collision)

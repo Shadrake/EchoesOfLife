@@ -13,7 +13,7 @@ public class PlayerProjectile : MonoBehaviour
 
     private Vector2 _direction;
     private Rigidbody2D rbProjectile;
-    
+
     void Start()
     {
         rbProjectile = GetComponent<Rigidbody2D>();
@@ -26,9 +26,9 @@ public class PlayerProjectile : MonoBehaviour
     }
 
     // Guardar una dirección para disparar.
-    public void SetDirection (Vector2 direction)
+    public void SetDirection(Vector2 direction)
     {
-        GetComponent<SpriteRenderer>().flipX = direction.x>=1f? false : true;
+        GetComponent<SpriteRenderer>().flipX = direction.x >= 1f ? false : true;
         _direction = direction;
     }
 
@@ -36,12 +36,12 @@ public class PlayerProjectile : MonoBehaviour
     public void DestroyProjectile()
     {
         Destroy(gameObject);
-        Debug.Log("Destruir proyectil 2");
+        Debug.Log("Destruir proyectil");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Cuando choca con un enemigo hace daño.
+        // Cuando choca con un enemigo, lámpara o cristal hace daño.
         bool isWall = collision.CompareTag("Wall");
         if (collision.CompareTag("Enemy") || collision.CompareTag("Lamp") || collision.CompareTag("Crystal") || isWall)
         {
@@ -49,13 +49,14 @@ public class PlayerProjectile : MonoBehaviour
             Debug.Log("Destruir proyectil");
         }
 
-        if(isWall)
+        // Si choca con una pared destruible (tag "Wall")
+        if (isWall)
         {
             Door breakable = collision.GetComponent<Door>();
             if (breakable != null)
             {
                 Debug.Log("Projectile: " + _direction);
-                breakable.TryBreak(_direction.x >= 1f ? true : false);
+                breakable.TryBreak(_direction.x >= 1f ? true : false);  // Intentamos romper la pared y le pasamos la dirección
             }
         }
     }

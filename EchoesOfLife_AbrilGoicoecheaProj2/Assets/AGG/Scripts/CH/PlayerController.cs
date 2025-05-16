@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     private bool shootUnlocked = false;
     //public float animTime;
 
+    [Header("Audio")]
+    public AudioSource sfxSource; // Fuente de audio solo para efectos (SFX)
+    public AudioClip shootClip;   // Sonido del disparo
+
 
     // Animaciones
     [Header("Component Settings")]
@@ -150,9 +154,16 @@ public class PlayerController : MonoBehaviour
         {
             direction = Vector3.left; // izq
         }
+
         GameObject projectile = Instantiate(projectilePrefab,
             weaponPositionInstantiate.transform.position + direction * 0.01f, Quaternion.identity);
 
         projectile.GetComponent<PlayerProjectile>().SetDirection(direction);
+
+        //  Reproducir sonido de disparo
+        if (sfxSource != null && shootClip != null)
+        {
+            sfxSource.PlayOneShot(shootClip);
+        }
     }
 }

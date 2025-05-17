@@ -41,14 +41,16 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Enemy") || collision.CompareTag("Rock")) && !isInmune && !isDead)
+        if ((collision.CompareTag("Enemy") || collision.CompareTag("Rock")) || (collision.CompareTag("FallingRock")) && !isInmune && !isDead)
         {
             float damage = 0;
 
             if (collision.CompareTag("Enemy"))
                 damage = collision.GetComponentInParent<Enemy>().damage;
-            else if (collision.CompareTag("Rock"))
+            else if (collision.CompareTag("FallingRock"))
                 damage = collision.GetComponent<FallingRock>().damage;
+            else if (collision.CompareTag("Rock"))
+                damage = collision.GetComponent<Rock>().damage;
 
             playerHealth -= damage;
             StartCoroutine(Inmunity());

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 806736515674487363}
   - component: {fileID: 8192830567678660}
   - component: {fileID: 1750860730243916006}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: FallingRock
-  m_TagString: Rock
+  m_TagString: FallingRock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

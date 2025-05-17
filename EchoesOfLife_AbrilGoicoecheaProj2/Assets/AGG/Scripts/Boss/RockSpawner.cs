@@ -14,7 +14,7 @@ public class RockSpawner : MonoBehaviour
     {
         if (timer > beat)
         {
-            GameObject cube = Instantiate(rocks[Random.Range(0, 3)], spawnPoints[Random.Range(0, 9)]);
+            GameObject cube = Instantiate(rocks[Random.Range(0, 1)], spawnPoints[Random.Range(0, 9)]);
             cube.transform.localPosition = Vector3.zero;
             timer -= beat;
         }

@@ -20,6 +20,12 @@ public class BossHealth : MonoBehaviour
     public Image healthBar;
     public GameObject healthUI;
 
+    [Header("Audio Settings")]
+    public AudioSource damageAudioSource;  // Referencia al AudioSource
+    public AudioClip damageSound;  // Sonido de daño
+    public float minPitch = 0.8f;  // Pitch mínimo
+    public float maxPitch = 2.4f;  // Pitch máximo
+
     void Start()
     {
         _enemy = GetComponent<Enemy>();
@@ -59,6 +65,13 @@ public class BossHealth : MonoBehaviour
         isDamaged = true;
         _animator.SetTrigger("Damaged");
 
+        // Cambiar el pitch aleatoriamente antes de reproducir el sonido de daño
+        if (damageAudioSource != null && damageSound != null)
+        {
+            damageAudioSource.pitch = Random.Range(minPitch, maxPitch);  // Cambiar el pitch aleatoriamente
+            damageAudioSource.PlayOneShot(damageSound);
+        }
+
         yield return new WaitForSeconds(0.5f);
         isDamaged = false;
     }
@@ -69,14 +82,14 @@ public class BossHealth : MonoBehaviour
         healthUI.SetActive(false);
         rockSpawn.SetActive(false);
 
-        // 🎵 Rugido del jefe sin detener música
+        // Rugido del jefe sin detener música
         GameManager gm = FindObjectOfType<GameManager>();
         if (gm != null)
         {
             gm.PlayBossDefeatedSFX();
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5.5f);
         _endTrigger.SetActive(true);
         Destroy(gameObject);
     }

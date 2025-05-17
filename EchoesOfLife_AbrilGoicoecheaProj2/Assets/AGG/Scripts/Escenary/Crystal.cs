@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,10 @@ public class Crystal : MonoBehaviour
     private GameObject _player;
     private PlayerHealth _playerHealth;
 
-    // Start is called before the first frame update
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip breakSound;
+
     void Start()
     {
         _crystalAnimator = GetComponent<Animator>();
@@ -16,13 +19,11 @@ public class Crystal : MonoBehaviour
         _playerHealth = _player.GetComponent<PlayerHealth>();
     }
 
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Weapon"))
         {
             _playerHealth.playerHealth += 2f;
-            //_crystalAnimator.SetBool("Break", true);
             StartCoroutine(DestroyCrystal());
         }
     }
@@ -30,6 +31,13 @@ public class Crystal : MonoBehaviour
     IEnumerator DestroyCrystal()
     {
         _crystalAnimator.SetBool("Break", true);
+
+        // 🔊 Reproducir sonido de cristal roto
+        if (audioSource != null && breakSound != null)
+        {
+            audioSource.PlayOneShot(breakSound);
+        }
+
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
